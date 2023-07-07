@@ -10,11 +10,13 @@ public class playerMovement : MonoBehaviour
     public Rigidbody2D playerRB;
     public Transform playerTransfom;
     public float moveSpeed = 5.0f;
+    public float distToCam = 14.0f;
 
     private Vector2 inputMovement;
     private Vector2 rawInputMovement;
     private Vector2 mousePos;
-    private Vector2 mouseWorldPos;
+    private Vector3 playerScreenPos;
+    private float angle;
     
     private void Awake() {
         playerControls = new PlayerActions();
@@ -27,10 +29,13 @@ public class playerMovement : MonoBehaviour
         playerRB.MovePosition(playerRB.position + inputMovement * Time.fixedDeltaTime);
 
         mousePos = playerControls.Controls.MousePosition.ReadValue<Vector2>();
-        mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        playerScreenPos = Camera.main.WorldToScreenPoint(playerTransfom.position);
+        
+        mousePos.x = mousePos.x - playerScreenPos.x;
+        mousePos.y = mousePos.y - playerScreenPos.y;
+        angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 
-        Quaternion rotation = Quaternion.LookRotation(new Vector3(mouseWorldPos.x, mouseWorldPos.y, 0) - transform.position, transform.TransformDirection(Vector3.up));
-        playerTransfom.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+        playerTransfom.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     private void OnEnable() {
