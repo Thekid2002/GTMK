@@ -60,9 +60,10 @@ public class WeaponController : MonoBehaviour
                 Rigidbody2D itemRB = item.GetComponent<Rigidbody2D>();
                 Vector2 lastVelocity = itemRB.velocity;
                 float velocity = itemRB.velocity.magnitude;
+                
                 Vector2 dir = new Vector2(weapon.position.x - playerTransfom.position.x, weapon.position.y - playerTransfom.position.y);
                 Vector2 direction = Vector2.Reflect(lastVelocity.normalized, dir.normalized);
-                Debug.Log($"dir: {dir.normalized}");
+                
                 itemRB.velocity = direction * velocity;
             }
         }
