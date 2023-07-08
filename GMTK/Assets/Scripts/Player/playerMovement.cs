@@ -5,13 +5,18 @@ using UnityEngine.InputSystem;
 
 public class playerMovement : MonoBehaviour
 {
+    // Input actions
     public PlayerActions playerControls;
 
+    // Public variabels to be set in inspector
     public Rigidbody2D playerRB;
     public Transform playerTransfom;
+    public Transform weapon;
+    public float weaponDist = 1.0f;
     public float moveSpeed = 5.0f;
     public float distToCam = 14.0f;
 
+    // Private variabels
     private Vector2 inputMovement;
     private Vector2 rawInputMovement;
     private Vector2 mousePos;
@@ -27,15 +32,6 @@ public class playerMovement : MonoBehaviour
         inputMovement = rawInputMovement * moveSpeed;
 
         playerRB.MovePosition(playerRB.position + inputMovement * Time.fixedDeltaTime);
-
-        mousePos = playerControls.Controls.MousePosition.ReadValue<Vector2>();
-        playerScreenPos = Camera.main.WorldToScreenPoint(playerTransfom.position);
-        
-        mousePos.x = mousePos.x - playerScreenPos.x;
-        mousePos.y = mousePos.y - playerScreenPos.y;
-        angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-
-        playerTransfom.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     private void OnEnable() {
