@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
+    // Public variabels to be set in inspector
     public Rigidbody2D projectileRB;
     public float projectileSpeed = 50.0f;
 
+    // Private variabels
     private Transform origin;
 
     private void FixedUpdate() {

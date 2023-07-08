@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
+    // Public variabels to be set in inspector
     public Transform firePos;
     public GameObject projectile;
-
     public float fireTime = 2f;
     
+    // Private variabels
     private Vector3 fireDir;
 
     private void Start() {
@@ -24,7 +25,6 @@ public class Cannon : MonoBehaviour
     }
 
     private void fire() {
-        Debug.Log("Fire!");
         GameObject instance = Instantiate(projectile, firePos.position, Quaternion.identity);
         instance.GetComponent<ProjectileBehaviour>().addForce(new Vector2(fireDir.x, fireDir.y), firePos);
     }
