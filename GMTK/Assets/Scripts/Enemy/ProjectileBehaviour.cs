@@ -23,7 +23,7 @@ public class ProjectileBehaviour : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if (other.collider.tag == "fireball" || other.collider.tag == "wall") {
+        if (other.collider.tag == "hitable") {
             Destroy(this.gameObject);
         }
     }

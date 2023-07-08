@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PuzzleController : MonoBehaviour
 {
+    public bool needsKey = false;
+    public bool gotKey = false;
+    public PuzzleObject key;
+    public PuzzleObject lockedDoor;
     public GameObject door;
     public List<PuzzleObject> puzzleObjectives = new List<PuzzleObject>();
 
@@ -22,6 +26,11 @@ public class PuzzleController : MonoBehaviour
                 completion++;
             }
         }
+
+        if (key.isActive) {
+            lockedDoor.isActive = true;
+        }
+
         if (completion == maxObjectives) {
             door.GetComponent<DoorController>().doorOpened = true;
         } else {

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3306161568307318655}
   m_Layer: 0
   m_Name: Torch
-  m_TagString: Untagged
+  m_TagString: hitable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
