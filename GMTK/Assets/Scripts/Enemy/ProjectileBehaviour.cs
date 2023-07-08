@@ -21,4 +21,10 @@ public class ProjectileBehaviour : MonoBehaviour
         origin = _origin;
         projectileRB.AddForce(direction * projectileSpeed); 
     }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.collider.tag == "fireball" || other.collider.tag == "wall") {
+            Destroy(this.gameObject);
+        }
+    }
 }
