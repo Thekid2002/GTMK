@@ -24,14 +24,11 @@ public class PuzzleController : MonoBehaviour
                 torches.Remove( torch );
             }
         }
-<<<<<<< Updated upstream
 
         if (key.isActive) {
             lockedDoor.isActive = true;
         }
 
-        if (completion == maxObjectives) {
-=======
         foreach( GameObject wizard in wizards )
         {
             if( wizard.activeSelf == false )
@@ -45,7 +42,6 @@ public class PuzzleController : MonoBehaviour
             defeatPanel.SetActive(true);
         }
         if (torches.Count == wizards.Count && wizards.Count == 0) {
->>>>>>> Stashed changes
             door.GetComponent<DoorController>().doorOpened = true;
             victoryPanel.SetActive( true );
         }

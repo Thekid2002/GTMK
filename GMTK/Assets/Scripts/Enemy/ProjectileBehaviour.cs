@@ -25,13 +25,6 @@ public class ProjectileBehaviour : MonoBehaviour
         projectileRB.AddForce(direction * projectileSpeed); 
     }
 
-<<<<<<< Updated upstream
-    private void OnCollisionEnter2D(Collision2D other) {
-        if (other.collider.tag == "hitable") {
-            Destroy(this.gameObject);
-        }
-    }
-=======
     void OnCollisionEnter2D( Collision2D col )
     {
         Debug.Log( col.collider.gameObject.transform.tag );
@@ -62,6 +55,4 @@ public class ProjectileBehaviour : MonoBehaviour
             Destroy( this.gameObject );
         }
     }
-
->>>>>>> Stashed changes
 }
