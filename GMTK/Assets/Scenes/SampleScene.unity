@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 251692970}
   - component: {fileID: 251692969}
   - component: {fileID: 251692972}
+  - component: {fileID: 251692973}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -502,6 +503,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3205d8863a3d943469ef1e9e11b486b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needsKey: 0
+  gotKey: 0
+  key: {fileID: 0}
+  lockedDoor: {fileID: 0}
   door: {fileID: 1272678064}
   torches:
   - {fileID: 600766758}
@@ -510,6 +515,18 @@ MonoBehaviour:
   - {fileID: 430476394}
   victoryPanel: {fileID: 1579233076}
   defeatPanel: {fileID: 1960443582}
+--- !u!114 &251692973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251692967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3491754eb7e79ea47825692ce266d1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &259386210
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,7 +757,7 @@ GameObject:
   - component: {fileID: 405801163}
   - component: {fileID: 405801162}
   m_Layer: 0
-  m_Name: Button (1)
+  m_Name: Try Again Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -810,7 +827,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 405801163}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 251692973}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: reloadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &405801163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8431,7 +8460,7 @@ GameObject:
   - component: {fileID: 1695612844}
   - component: {fileID: 1695612843}
   m_Layer: 0
-  m_Name: Button (1)
+  m_Name: Try Again Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8501,7 +8530,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1695612844}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 251692973}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: reloadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1695612844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25373,7 +25414,7 @@ GameObject:
   - component: {fileID: 1938684969}
   - component: {fileID: 1938684968}
   m_Layer: 0
-  m_Name: Button
+  m_Name: Next Level Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25443,7 +25484,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1938684969}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 251692973}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: nextScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1938684969
 MonoBehaviour:
   m_ObjectHideFlags: 0
