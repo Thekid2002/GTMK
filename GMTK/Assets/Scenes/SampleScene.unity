@@ -2096,6 +2096,11 @@ MonoBehaviour:
   weaponDist: 1
   moveSpeed: 5
   distToCam: 14
+  hearts:
+  - {fileID: 751878566}
+  - {fileID: 1931218337}
+  - {fileID: 421987601}
+  defeatPanel: {fileID: 1960443582}
 --- !u!114 &1417396269
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,25 +17,34 @@ public class PuzzleController : MonoBehaviour
     public GameObject victoryPanel;
     public GameObject defeatPanel;
 
+    
+
     // Update is called once per frame
     void Update() {
-        foreach (TorchController torch in  torches) {
-            if (torch.torchLit) {
-                torches.Remove( torch );
+        if(torches.Count > 0 ){
+            foreach (TorchController torch in  torches) {
+                if (torch.torchLit) 
+                {
+                    torches.Remove( torch );
+                }
             }
         }
 
-        if (key.isActive) {
+        if( wizards.Count > 0 )
+        {
+            foreach( GameObject wizard in wizards )
+            {
+                if( wizard.activeSelf == false )
+                {
+                    wizards.Remove( wizard );
+                }
+            }
+        }
+
+        if(key && key.isActive) {
             lockedDoor.isActive = true;
         }
 
-        foreach( GameObject wizard in wizards )
-        {
-            if( wizard.activeSelf == false )
-            {
-                wizards.Remove( wizard );
-            }
-        }
         if(torches.Count != 0 && wizards.Count == 0 )
         {
             Debug.Log( "Lost the game bro" );

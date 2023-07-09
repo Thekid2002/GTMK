@@ -9,7 +9,6 @@ public class ProjectileBehaviour : MonoBehaviour
     float projectileSpeed = 50;
     bool hitSword = false;
 
-
     // Private variabels
     float timer;
 
@@ -38,7 +37,8 @@ public class ProjectileBehaviour : MonoBehaviour
                 Destroy( this.gameObject );
                 break;
             case "Player":
-                Debug.Log( "Ouch" );
+                col.gameObject.GetComponent<playerMovement>().removeHealth();
+                Destroy( this.gameObject );
                 break;
             default:
                 Destroy( this.gameObject );
@@ -55,4 +55,6 @@ public class ProjectileBehaviour : MonoBehaviour
             Destroy( this.gameObject );
         }
     }
+
+
 }
