@@ -7,10 +7,18 @@ public class WeaponController : MonoBehaviour
 {
     // Input actions
     public PlayerActions playerControls;
+    public SpriteRenderer playerSprtRend;
+
+    public SpriteRenderer weaponSprtRend;
+
+
+    Material mat;
 
     // Public variabels to be set in inspector
     public Transform playerTransfom;
-    public Transform weapon;
+    public Transform rotateForWeapon;
+    public Transform deflectWeapon;
+    public Transform arm;
     public Collider2D weaponCollider;
     public float weaponDist = 1.0f;
 
@@ -23,10 +31,17 @@ public class WeaponController : MonoBehaviour
     private void Awake() {
         playerControls = new PlayerActions();
         playerControls.Controls.Deflect.performed += onDeflect;
+
     }
 
     private void FixedUpdate() {
         rotateWeapon();
+        if( !Input.GetKey( KeyCode.Mouse0 ) ){
+            weaponSprtRend.flipX = false;
+        }else
+        {
+            weaponSprtRend.flipX = true;
+        }
     }
 
     private void rotateWeapon() {
@@ -36,13 +51,22 @@ public class WeaponController : MonoBehaviour
         Vector2 dir = new Vector2(mousePos.x - playerScreenPos.x, mousePos.y - playerScreenPos.y);
         dir = dir.normalized;
         
-        weapon.transform.localPosition = new Vector3(dir.x * weaponDist, dir.y * weaponDist, 0.0f);
+        rotateForWeapon.transform.localPosition = new Vector3(dir.x * weaponDist, dir.y * weaponDist, 0.0f);
 
         mousePos.x = mousePos.x - playerScreenPos.x;
         mousePos.y = mousePos.y - playerScreenPos.y;
-        angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+        angle = Mathf.Atan2( mousePos.y, mousePos.x ) * Mathf.Rad2Deg;
 
-        weapon.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        if(angle < -90 ||angle > 90 )
+        {
+            rotatePlayer(true);
+        }
+        else
+        {
+            rotatePlayer( false );
+        }
+
+        rotateForWeapon.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         Vector2 scale = transform.localScale;
         if (Vector2.Dot(Vector2.right, dir) < 0.0f)
@@ -54,31 +78,13 @@ public class WeaponController : MonoBehaviour
         transform.localScale = scale;
     }
 
+    public void rotatePlayer(bool flip)
+    {
+        playerSprtRend.flipX = flip;
+    }
+
     public void onDeflect(InputAction.CallbackContext ctx) {
-        if (deflectabels.Count > 0) {
-            foreach (Collider2D item in deflectabels) {
-                Rigidbody2D itemRB = item.GetComponent<Rigidbody2D>();
-                Vector2 lastVelocity = itemRB.velocity;
-                float velocity = itemRB.velocity.magnitude;
-                
-                Vector2 dir = new Vector2(weapon.position.x - playerTransfom.position.x, weapon.position.y - playerTransfom.position.y);
-                Vector2 direction = Vector2.Reflect(lastVelocity.normalized, dir.normalized);
-                
-                itemRB.velocity = direction * velocity;
-            }
-        }
-    }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (!deflectabels.Contains(other)) {
-            deflectabels.Add(other);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other) {
-        if (deflectabels.Contains(other)) {
-            deflectabels.Remove(other);
-        }
     }
 
     private void OnEnable() {

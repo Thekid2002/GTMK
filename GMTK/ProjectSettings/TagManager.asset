@@ -4,9 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< Updated upstream
   - fireball
   - key
   - hitable
+=======
+  - Defelctable
+  - Torch
+  - Wizard
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX

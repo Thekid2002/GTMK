@@ -6,25 +6,62 @@ public class ProjectileBehaviour : MonoBehaviour
 {
     // Public variabels to be set in inspector
     public Rigidbody2D projectileRB;
-    public float projectileSpeed = 50.0f;
+    float projectileSpeed = 50;
+    bool hitSword = false;
+
 
     // Private variabels
-    private Transform origin;
+    float timer;
+
 
     private void FixedUpdate() {
-        if (Vector2.Distance(this.transform.position, origin.position) > 10){
+        timer += Time.deltaTime;
+        if (timer > 10){
             Destroy(this.gameObject);
         }
     }
 
     public void addForce(Vector2 direction, Transform _origin) {
-        origin = _origin;
         projectileRB.AddForce(direction * projectileSpeed); 
     }
 
+<<<<<<< Updated upstream
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.collider.tag == "hitable") {
             Destroy(this.gameObject);
         }
     }
+=======
+    void OnCollisionEnter2D( Collision2D col )
+    {
+        Debug.Log( col.collider.gameObject.transform.tag );
+        switch( col.collider.gameObject.transform.tag )
+        {
+            case "Defelctable":
+                hitSword = true;
+                break;
+            case "Torch":
+                col.gameObject.GetComponent<TorchController>().torchLit = true;
+                Destroy( this.gameObject );
+                break;
+            case "Player":
+                Debug.Log( "Ouch" );
+                break;
+            default:
+                Destroy( this.gameObject );
+                break;
+        }
+    }
+
+    private void OnTriggerEnter2D( Collider2D col )
+    {
+        Debug.Log( col.gameObject.tag );
+        if(hitSword && col.gameObject.tag == "Wizard" )
+        {
+            col.gameObject.SetActive( false );
+            Destroy( this.gameObject );
+        }
+    }
+
+>>>>>>> Stashed changes
 }

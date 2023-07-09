@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class enemyMovement : MonoBehaviour
 {
+    // Public variabels to be set in inspector
+    public GameObject projectile;
+
+
     NavMeshAgent agent;
     public GameObject player;
 
@@ -31,7 +35,7 @@ public class enemyMovement : MonoBehaviour
 
         if(timer > 8 && readyToShoot )
         {
-            Debug.Log( "SHOOT" );
+            fire();
             readyToShoot = false;
             timer = 0;
         }
@@ -42,5 +46,11 @@ public class enemyMovement : MonoBehaviour
         var agentDrift = 0.0001f; // minimal
         var driftPos = vec + ( Vector3 )( agentDrift * Random.insideUnitCircle );
         agent.SetDestination( driftPos );
+    }
+
+    private void fire()
+    {
+        GameObject instance = Instantiate( projectile, transform.position, Quaternion.identity );
+        instance.GetComponent<ProjectileBehaviour>().addForce( new Vector2( (instance.transform.position.x-player.transform.position.x)*-1, (instance.transform.position.y-player.transform.position.y)*-1 ), transform );
     }
 }

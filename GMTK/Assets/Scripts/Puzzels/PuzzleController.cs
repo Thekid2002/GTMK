@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class PuzzleController : MonoBehaviour
 {
@@ -9,31 +11,45 @@ public class PuzzleController : MonoBehaviour
     public PuzzleObject key;
     public PuzzleObject lockedDoor;
     public GameObject door;
-    public List<PuzzleObject> puzzleObjectives = new List<PuzzleObject>();
+    public List<TorchController> torches = new List<TorchController>();
+    public List<GameObject> wizards = new List<GameObject>();
 
-    private int completion = 0;
-    private int maxObjectives;
-    // Start is called before the first frame update
-    void Start() {
-        maxObjectives = puzzleObjectives.Count;
-    }
+    public GameObject victoryPanel;
+    public GameObject defeatPanel;
 
     // Update is called once per frame
     void Update() {
-        completion = 0;
-        foreach (PuzzleObject item in  puzzleObjectives) {
-            if (item.isActive) {
-                completion++;
+        foreach (TorchController torch in  torches) {
+            if (torch.torchLit) {
+                torches.Remove( torch );
             }
         }
+<<<<<<< Updated upstream
 
         if (key.isActive) {
             lockedDoor.isActive = true;
         }
 
         if (completion == maxObjectives) {
+=======
+        foreach( GameObject wizard in wizards )
+        {
+            if( wizard.activeSelf == false )
+            {
+                wizards.Remove( wizard );
+            }
+        }
+        if(torches.Count != 0 && wizards.Count == 0 )
+        {
+            Debug.Log( "Lost the game bro" );
+            defeatPanel.SetActive(true);
+        }
+        if (torches.Count == wizards.Count && wizards.Count == 0) {
+>>>>>>> Stashed changes
             door.GetComponent<DoorController>().doorOpened = true;
-        } else {
+            victoryPanel.SetActive( true );
+        }
+        else {
             door.GetComponent<DoorController>().doorOpened = false;
         }
     }
